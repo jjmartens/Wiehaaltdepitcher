@@ -1,0 +1,4 @@
+.players li.selected:hover {
+    background-color: #BBD8DC !important;
+    color: white;
+  }
