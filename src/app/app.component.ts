@@ -1,27 +1,30 @@
-import { Component } from '@angular/core';
-
-
-export class Player {
-  id: number;
-  name: string;
-  nr_of_pitchers: number;
-}
-
-const PLAYERS: Player[] = [
-  {id: 1, name: 'Bauke', nr_of_pitchers : 0},
-  {id: 2, name: 'Roland', nr_of_pitchers : 0},
-  {id: 3, name: 'Jochem', nr_of_pitchers : 0},
-  {id: 4, name: 'Jan', nr_of_pitchers : 0},
-  {id: 5, name: 'Sebastiaan', nr_of_pitchers : 0}
-];
+import {Component, OnInit} from '@angular/core';
+import {Player} from './player';
+import { PlayerService } from './player.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  providers: [PlayerService]
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   name = 'wiehaaltdepitcher';
   title = 'Wie haalt de pitcher?';
-  players = PLAYERS;
+  // players = PLAYERS;
+  players: Player[];
+  selectedPlayer: Player;
+  onSelect(player: Player): void {
+    this.selectedPlayer = player;
+  }
+  getPlayers(): void {
+    this.playerService.getPlayers().then(players => this.players = players);
+  }
+
+  constructor(private playerService: PlayerService){
+  }
+
+  ngOnInit(): void {
+    this.getPlayers();
+  }
 }
