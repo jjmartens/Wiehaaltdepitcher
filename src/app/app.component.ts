@@ -21,7 +21,7 @@ const PLAYERS: Player[] = [
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  name = "wiehaaltdepitcher";
+  name = 'wiehaaltdepitcher';
   title = 'Wie haalt de pitcher?';
   players = PLAYERS;
 }
