@@ -11,23 +11,29 @@ import { PlayerService } from './player.service';
 export class AppComponent implements OnInit {
   name = 'wiehaaltdepitcher';
   title = 'Wie haalt de pitcher?';
-  // players = PLAYERS;
   players: Player[];
   selectedPlayer: Player;
   pitcherBoy: Player;
+  editMode: boolean;
 
   constructor(private playerService: PlayerService){
+    this.editMode = false;
   }
+
   ngOnChange(): void {
         this.players.sort(function(a:Player ,b:Player): number { return (a.nr_of_pitchers > b.nr_of_pitchers) ? -1 : ((b.nr_of_pitchers > a.nr_of_pitchers) ? 1 : 0); });
 
   }
   ngOnInit(): void {
     this.getPlayers();
-    this.players.sort(function(a:Player ,b:Player): number { return (a.nr_of_pitchers > b.nr_of_pitchers) ? 1 : ((b.nr_of_pitchers > a.nr_of_pitchers) ? -1 : 0); });
+    this.players.sort(function(a:Player, b:Player): number { return (a.nr_of_pitchers > b.nr_of_pitchers) ? 1 : ((b.nr_of_pitchers > a.nr_of_pitchers) ? -1 : 0); });
   }
 
   roll() {
+    var tkb = Math.floor(Math.random()*100)
+    // if(tkb === 42) {
+    //   this.pitcherBoy =
+    // }
     var rand = Math.floor(Math.random() * this.players.length);
     this.pitcherBoy = this.players[rand];
   }
@@ -35,16 +41,28 @@ export class AppComponent implements OnInit {
   onSelect(player: Player): void {
     this.selectedPlayer = player;
   }
+
   getPlayers(): void {
     this.playerService.getPlayers().then(players => this.players = players);
   }
-  cowardFarmer(): void{
+
+  cowardFarmer(player: Player): void{
+    player.nr_of_laf += 1;
     this.pitcherBoy = null;
   }
 
   fetchedPitcher(player: Player): void {
-    player.nr_of_pitchers += 1; 
+    player.nr_of_pitchers += 1;
     this.pitcherBoy = null;
-    this.ngOnChange();  
+    this.ngOnChange();
+  }
+
+  toggleEdit(): void {
+    if(this.editMode == false) {
+      this.editMode = true;
+    }
+    else {
+      this.editMode = false;
+    }
   }
 }

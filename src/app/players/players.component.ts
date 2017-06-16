@@ -10,7 +10,7 @@ import {Player} from '../player';
 export class PlayersComponent implements OnInit {
   @Input() player: Player;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
   }

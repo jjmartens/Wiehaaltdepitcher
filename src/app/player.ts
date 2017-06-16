@@ -5,5 +5,6 @@ export class Player {
   id: number;
   name: string;
   nr_of_pitchers: number;
-  selected: Boolean;
+  nr_of_laf: number;
+  selected: boolean;
 }

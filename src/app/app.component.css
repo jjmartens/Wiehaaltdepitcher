@@ -1,8 +1,33 @@
-.players li:hover {
-    background-color: #BBD8DC !important;
+.players tr.datacells:hover {
+    background-color: lightgrey !important;
     color: white;
+    border-radius: 5px
   }
 
 .selected {
   background-color: lightgrey;
+}
+
+#wiedepitcherhaalt{
+  margin-top: 25px;
+  height: 250px;
+  text-align: center;
+  background-color: lightgrey;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+#wiedepitcherhaalt > h1 {
+  font-size: 5em;
+
+}
+
+.resultbutton {
+  position: relative;
+  bottom: -70px;
+  margin: 0px 25px
+}
+
+#edit {
+  float:right
 }

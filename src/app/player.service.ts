@@ -2,7 +2,7 @@
  * Created by bauke on 8-6-2017.
  */
 import { Injectable } from '@angular/core';
-import {PLAYERS} from './mock-players';
+import {PLAYERS} from './players';
 import {Player} from './player';
 
 @Injectable()

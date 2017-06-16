@@ -6,30 +6,38 @@
   </div>
   <div class="row">
     <div class="col-xs-12 col-md-6">
-      <h3>Wie spelen er mee?</h3>
+      <button class="btn btn-normal btn-lg btn-block" (click)="roll()">Haal pitcher</button>
+      <div id="wiedepitcherhaalt" *ngIf="this.pitcherBoy">
+        <h1>{{this.pitcherBoy.name}}</h1>
+        <button class="btn btn-success btn-lg resultbutton" (click)="fetchedPitcher(pitcherBoy)">Pitcher gehaald</button>
+        <button class="btn btn-danger btn-lg resultbutton" (click)="cowardFarmer(pitcherBoy)">CowardFarmer</button>
+      </div>
+    </div>
+    <div class="col-xs-12 col-md-6">
+      <h3>Wie spelen er me?<button id="edit" class="btn btn-default" (click)="toggleEdit()">Edit</button></h3>
       <table class="table players">
         <tr>
           <th>Naam</th>
           <th>Pitchers gehaald</th>
-          <th>Acties</th>
+          <th>Keren gelaft</th>
         </tr>
-        <tr *ngFor="let player of players" (click)="onSelect(player)" [class.selected]="player === selectedPlayer">
-          <td>{{player.name}}</td>
-          <td>{{player.nr_of_pitchers}}</td>
-          <td></td>
+        <tr class="datacells" *ngFor="let player of players" (click)="onSelect(player)" [class.selected]="player === selectedPlayer">
+          <td *ngIf="player.selected">{{player.name}}</td>
+          <td *ngIf="player.selected">{{player.nr_of_pitchers}}</td>
+          <td *ngIf="player.selected">{{player.nr_of_laf}}</td>
         </tr>
       </table>
-    <app-players [player]="selectedPlayer"></app-players>
+    <!-- <app-players [player]="selectedPlayer"></app-players> -->
     </div>
-    <div class="col-xs-12 col-md-6">
-      <h3>Wie gaat hem halen?</h3>
-      <button (click)="roll()">ROLL THE DICEEEE!</button>
-    </div>
+  </div>
 
-    <div *ngIf="this.pitcherBoy" class="col-xs-12 col-md-6">
-      <h3>WINAAR!!!</h3>
-      <h3>{{this.pitcherBoy.name}}</h3>
-      <button class="btn btn-normal" (click)="fetchedPitcher(pitcherBoy)">Pitcher gehaalt</button> <button class="btn btn-normal" (click)="cowardFarmer()">Laffe boer!</button> 
+  <div *ngIf="this.editMode" class="row">
+    <h1>Edit de spelers hier</h1>
+    <div class="col-md-6">
+      <div *ngFor="let player of players">
+        <input [(ngModel)]="player.name" placeholder="Naam" type="text" class="form-control">
+        <input type="checkbox" [(ngModel)]="player.selected" data-toggle="toggle">
+      </div>
     </div>
   </div>
 </div>
