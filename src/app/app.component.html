@@ -31,19 +31,37 @@
     </div>
   </div>
 
-  <div [hidden]="!this.editMode" class="row">
+  <div class="row"> <!--[hidden]="!this.editMode" class="row">-->
     <h1>Edit de spelers hier</h1>
     <div class="col-md-6">
       <div *ngFor="let player of players">
         <input [(ngModel)]="player.name" placeholder="Naam" type="text" class="form-control name-field">
-        <input  class="play-toggle" type="checkbox" [(ngModel)]="player.selected" data-toggle="toggle">
+        <!-- Checkbox 1 -->
+        <label class="switch">
+          <input type="checkbox" [(ngModel)]="player.selected">
+          <div class="slider round"></div>
+        </label>
+        <!-- Checkbox 2 -->
+        <!--<div class="material-switch pull-right">-->
+          <!--<input id="someSwitchOptionSuccess" name="someSwitchOption001" type="checkbox" [(ngModel)]="player.selected"/>-->
+          <!--<label for="someSwitchOptionSuccess" class="label-success"></label>-->
+        <!--</div>-->
       </div>
-    </div>
   </div>
 </div>
 
-<!--<script>-->
-  <!--if($.("div.toggle.btn.btn-primary").hasClass("off")){-->
-    <!--$.("div.toggle.btn.btn-primary").find("input").-->
-  <!--}-->
-<!--</script>-->
+<script>
+//  $(function() {
+//    $('#toggle-event').change(function() {
+//      $('#console-event').html('Toggle: ' + $(this).prop('checked'))
+//    })
+//  })
+//
+//  $scope.$apply(function() {
+//    $(".toggle.btn.btn-primary").click(function(){
+////      $(".toggle.btn.btn-primary").bootstrapToggle('toggle')
+//    });
+//  });
+
+  $("[name='my-checkbox']").bootstrapSwitch();
+</script>

@@ -21,20 +21,29 @@ export class AppComponent implements OnInit {
   }
 
   ngOnChange(): void {
-        this.players.sort(function(a:Player ,b:Player): number { return (a.nr_of_pitchers > b.nr_of_pitchers) ? -1 : ((b.nr_of_pitchers > a.nr_of_pitchers) ? 1 : 0); });
-
+    if (sessionStorage.players) {
+      this.players = sessionStorage.players;
+      console.log(this.players)
+    } else {
+      sessionStorage.players = this.players;
+    }
+    try {
+      this.players.sort(function(a: Player ,b: Player): number { return (a.nr_of_pitchers > b.nr_of_pitchers) ? -1 : ((b.nr_of_pitchers > a.nr_of_pitchers) ? 1 : 0); });
+    } catch (e) {
+      console.log(e)
+    }
   }
   ngOnInit(): void {
     this.getPlayers();
-    this.players.sort(function(a: Player, b: Player): number { return (a.nr_of_pitchers > b.nr_of_pitchers) ? 1 : ((b.nr_of_pitchers > a.nr_of_pitchers) ? -1 : 0); });
+    // this.players.sort(function(a: Player, b: Player): number { return (a.nr_of_pitchers > b.nr_of_pitchers) ? 1 : ((b.nr_of_pitchers > a.nr_of_pitchers) ? -1 : 0); });
   }
 
   roll() {
-    var tkb = Math.floor(Math.random()*100)
+    let tkb = Math.floor(Math.random() * 100)
     // if(tkb === 42) {
     //   this.pitcherBoy =
     // }
-    var rand = Math.floor(Math.random() * this.players.length);
+    let rand = Math.floor(Math.random() * this.players.length);
     this.pitcherBoy = this.players[rand];
   }
 
@@ -58,10 +67,9 @@ export class AppComponent implements OnInit {
   }
 
   toggleEdit(): void {
-    if(this.editMode == false) {
+    if (this.editMode === false) {
       this.editMode = true;
-    }
-    else {
+    } else {
       this.editMode = false;
     }
   }
