@@ -31,3 +31,17 @@
 #edit {
   float:right
 }
+
+.top {
+  min-height: 300px;
+}
+
+.name-field {
+  width:80%;
+  margin-right: 0px;
+  display: inline-block;
+}
+
+/*.play-toggle {*/
+  /*float: right;*/
+/*}*/

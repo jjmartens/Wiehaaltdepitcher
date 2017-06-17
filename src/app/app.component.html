@@ -4,7 +4,7 @@
       <h1>{{title}}</h1>
     </div>
   </div>
-  <div class="row">
+  <div class="row top">
     <div class="col-xs-12 col-md-6">
       <button class="btn btn-normal btn-lg btn-block" (click)="roll()">Haal pitcher</button>
       <div id="wiedepitcherhaalt" *ngIf="this.pitcherBoy">
@@ -31,13 +31,19 @@
     </div>
   </div>
 
-  <div *ngIf="this.editMode" class="row">
+  <div [hidden]="!this.editMode" class="row">
     <h1>Edit de spelers hier</h1>
     <div class="col-md-6">
       <div *ngFor="let player of players">
-        <input [(ngModel)]="player.name" placeholder="Naam" type="text" class="form-control">
-        <input type="checkbox" [(ngModel)]="player.selected" data-toggle="toggle">
+        <input [(ngModel)]="player.name" placeholder="Naam" type="text" class="form-control name-field">
+        <input  class="play-toggle" type="checkbox" [(ngModel)]="player.selected" data-toggle="toggle">
       </div>
     </div>
   </div>
 </div>
+
+<!--<script>-->
+  <!--if($.("div.toggle.btn.btn-primary").hasClass("off")){-->
+    <!--$.("div.toggle.btn.btn-primary").find("input").-->
+  <!--}-->
+<!--</script>-->

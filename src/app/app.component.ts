@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
   }
   ngOnInit(): void {
     this.getPlayers();
-    this.players.sort(function(a:Player, b:Player): number { return (a.nr_of_pitchers > b.nr_of_pitchers) ? 1 : ((b.nr_of_pitchers > a.nr_of_pitchers) ? -1 : 0); });
+    this.players.sort(function(a: Player, b: Player): number { return (a.nr_of_pitchers > b.nr_of_pitchers) ? 1 : ((b.nr_of_pitchers > a.nr_of_pitchers) ? -1 : 0); });
   }
 
   roll() {
