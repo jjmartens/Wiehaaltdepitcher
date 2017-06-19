@@ -21,12 +21,14 @@ export class AppComponent implements OnInit {
   }
 
   ngOnChange(): void {
-    if (sessionStorage.players) {
-      this.players = sessionStorage.players;
-      console.log(this.players)
-    } else {
-      sessionStorage.players = this.players;
-    }
+    // localStorage.setItem("players", JSON.stringify(this.players));
+    // if(localStorage.getItem("players")) {
+    //   this.players = JSON.parse(localStorage.getItem("players"));
+    // } else {
+    //   localStorage.setItem("players", JSON.stringify(this.players));
+    // }
+    // console.log(JSON.parse(localStorage.getItem("players")));
+    localStorage.setItem("players", JSON.stringify(this.players));
     try {
       this.players.sort(function(a: Player ,b: Player): number { return (a.nr_of_pitchers > b.nr_of_pitchers) ? -1 : ((b.nr_of_pitchers > a.nr_of_pitchers) ? 1 : 0); });
     } catch (e) {
@@ -35,6 +37,10 @@ export class AppComponent implements OnInit {
   }
   ngOnInit(): void {
     this.getPlayers();
+        setTimeout(function(){
+          this.checkStorageForPlayers();
+    }, 500);
+    // this.checkStorageForPlayers();
     // this.players.sort(function(a: Player, b: Player): number { return (a.nr_of_pitchers > b.nr_of_pitchers) ? 1 : ((b.nr_of_pitchers > a.nr_of_pitchers) ? -1 : 0); });
   }
 
@@ -52,12 +58,28 @@ export class AppComponent implements OnInit {
   }
 
   getPlayers(): void {
-    this.playerService.getPlayers().then(players => this.players = players);
+    this.playerService.getPlayers().then(players => this.players = players)
+    // .then(function() {
+    //   this.checkStorageForPlayers();
+    // }, function(e) {
+    //   console.log(e);
+    // });
+    // this.checkStorageForPlayers();
+  }
+
+  checkStorageForPlayers(): void {
+    if(localStorage.getItem("players")) {
+      this.players = JSON.parse(localStorage.getItem("players"));
+      console.log(localStorage.getItem("players"));
+    } else {
+      localStorage.setItem("players", JSON.stringify(this.players));
+    }
   }
 
   cowardFarmer(player: Player): void{
     player.nr_of_laf += 1;
     this.pitcherBoy = null;
+    this.ngOnChange();
   }
 
   fetchedPitcher(player: Player): void {
@@ -72,5 +94,6 @@ export class AppComponent implements OnInit {
     } else {
       this.editMode = false;
     }
+    this.ngOnChange();
   }
 }
