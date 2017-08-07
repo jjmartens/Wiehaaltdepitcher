@@ -4,7 +4,7 @@
       <h1>{{title}}</h1>
     </div>
   </div>
-  <div class="row top">
+  <div class="row">
     <div class="col-xs-12 col-md-6">
       <button class="btn btn-normal btn-lg btn-block" (click)="roll()">Haal pitcher</button>
       <div id="wiedepitcherhaalt" *ngIf="this.pitcherBoy">
@@ -13,8 +13,22 @@
         <button class="btn btn-danger btn-lg resultbutton" (click)="cowardFarmer(pitcherBoy)">CowardFarmer</button>
       </div>
     </div>
+  </div>
+
+  <div class="row"> <!--[hidden]="!this.editMode" class="row">-->
     <div class="col-xs-12 col-md-6">
-      <h3>Wie spelen er me?<button id="edit" class="btn btn-default" (click)="toggleEdit()">Edit</button></h3>
+     <h3>Spelers</h3>
+      <div *ngFor="let player of players">
+        <input [(ngModel)]="player.name" placeholder="Naam" type="text" class="form-control name-field">
+        <!-- Checkbox 1 -->
+        <label class="switch">
+          <input type="checkbox" [(ngModel)]="player.selected">
+          <div class="slider round"></div>
+        </label>
+      </div>
+    </div>
+    <div class="col-xs-12 col-md-6">
+      <h3>Statistieken spelers<button id="edit" class="btn btn-default" (click)="toggleEdit()">Edit</button></h3>
       <table class="table players">
         <tr>
           <th>Naam</th>
@@ -27,41 +41,10 @@
           <td *ngIf="player.selected">{{player.nr_of_laf}}</td>
         </tr>
       </table>
-    <!-- <app-players [player]="selectedPlayer"></app-players> -->
     </div>
-  </div>
 
-  <div class="row"> <!--[hidden]="!this.editMode" class="row">-->
-    <h1>Edit de spelers hier</h1>
-    <div class="col-md-6">
-      <div *ngFor="let player of players">
-        <input [(ngModel)]="player.name" placeholder="Naam" type="text" class="form-control name-field">
-        <!-- Checkbox 1 -->
-        <label class="switch">
-          <input type="checkbox" [(ngModel)]="player.selected">
-          <div class="slider round"></div>
-        </label>
-        <!-- Checkbox 2 -->
-        <!--<div class="material-switch pull-right">-->
-          <!--<input id="someSwitchOptionSuccess" name="someSwitchOption001" type="checkbox" [(ngModel)]="player.selected"/>-->
-          <!--<label for="someSwitchOptionSuccess" class="label-success"></label>-->
-        <!--</div>-->
-      </div>
-  </div>
 </div>
 
 <script>
-//  $(function() {
-//    $('#toggle-event').change(function() {
-//      $('#console-event').html('Toggle: ' + $(this).prop('checked'))
-//    })
-//  })
-//
-//  $scope.$apply(function() {
-//    $(".toggle.btn.btn-primary").click(function(){
-////      $(".toggle.btn.btn-primary").bootstrapToggle('toggle')
-//    });
-//  });
-
   $("[name='my-checkbox']").bootstrapSwitch();
 </script>
