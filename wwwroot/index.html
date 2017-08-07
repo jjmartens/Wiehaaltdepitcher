@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+
+	<title>Wie haalt de pitcher</title>
+	<base href="/">
+    <!-- 1. Load libraries -->
+    <script src="js/core.js"></script>
+    <script src="js/zone.js"></script>
+    <script src="js/reflect.js"></script>
+    <!-- 2. Configure SystemJS -->
+    <script src="systemjs.config.js"></script>
+    <script>
+        System.import('app').catch(function(err){ console.error(err); });
+    </script>
+	<!--[if lt IE 9]>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/es5-shim/2.0.8/es5-shim.min.js"></script>
+	<![endif]-->
+</head>
+<body>
+	<app-root>
+		De applicatie wordt geladen ...
+	</app-root>
+</body>
+</html>
