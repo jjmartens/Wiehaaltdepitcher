@@ -6,9 +6,7 @@ const express = require('express');
 const path = require('path');
 const http = require('http');
 const bodyParser = require('body-parser');
-
-// Get our API routes
-const api = require('./server/routes/api');
+const sqlite3 = require('sqlite3');
 
 const app = express();
 
@@ -19,12 +17,15 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // Point static path to dist
 app.use(express.static(path.join(__dirname, 'dist')));
 
+// Get our API routes
+const api = require('./routes/api');
+
 // Set our api routes
 app.use('/api', api);
 
 // Catch all other routes and return the index file
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist/index.html'));
+  res.sendFile(path.join(__dirname, '../wwwroot/index.html'));
 });
 
 /**

@@ -21,14 +21,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnChange(): void {
-    // localStorage.setItem("players", JSON.stringify(this.players));
-    // if(localStorage.getItem("players")) {
-    //   this.players = JSON.parse(localStorage.getItem("players"));
-    // } else {
-    //   localStorage.setItem("players", JSON.stringify(this.players));
-    // }
-    // console.log(JSON.parse(localStorage.getItem("players")));
-    localStorage.setItem("players", JSON.stringify(this.players));
     try {
       this.players.sort(function(a: Player ,b: Player): number { return (a.nr_of_pitchers > b.nr_of_pitchers) ? -1 : ((b.nr_of_pitchers > a.nr_of_pitchers) ? 1 : 0); });
     } catch (e) {
@@ -37,11 +29,6 @@ export class AppComponent implements OnInit {
   }
   ngOnInit(): void {
     this.getPlayers();
-        setTimeout(function(){
-          this.checkStorageForPlayers();
-    }, 500);
-    // this.checkStorageForPlayers();
-    // this.players.sort(function(a: Player, b: Player): number { return (a.nr_of_pitchers > b.nr_of_pitchers) ? 1 : ((b.nr_of_pitchers > a.nr_of_pitchers) ? -1 : 0); });
   }
 
   roll() {
@@ -58,22 +45,7 @@ export class AppComponent implements OnInit {
   }
 
   getPlayers(): void {
-    this.playerService.getPlayers().then(players => this.players = players)
-    // .then(function() {
-    //   this.checkStorageForPlayers();
-    // }, function(e) {
-    //   console.log(e);
-    // });
-    // this.checkStorageForPlayers();
-  }
-
-  checkStorageForPlayers(): void {
-    if(localStorage.getItem("players")) {
-      this.players = JSON.parse(localStorage.getItem("players"));
-      console.log(localStorage.getItem("players"));
-    } else {
-      localStorage.setItem("players", JSON.stringify(this.players));
-    }
+    this.playerService.getPlayers().subscribe(players => this.players = players);
   }
 
   cowardFarmer(player: Player): void{
